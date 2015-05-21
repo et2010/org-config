@@ -54,7 +54,7 @@
   (and (cond
         ((string= tag "hold")
          t)
-        ((string= tag "farm")
+        ((string= tag "lab")
          t))
        (concat "-" tag)))
 

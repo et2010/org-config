@@ -262,7 +262,7 @@
 
 (defvar jw/hide-scheduled-and-waiting-next-tasks t)
 (defvar jw/insert-inactive-timestamp t)
-(defvar jw/organization-task-id "")
+(defvar jw/organization-task-id "4005a7cf-fcd9-472d-8a2b-53a19d486439")
 (defvar jw/plantuml-if-count 0)
 (defvar jw/project-list nil)
 
@@ -698,7 +698,7 @@
 ; Targets complete directly with IDO
 (setq org-outline-path-complete-in-steps nil)
 
-(setq org-plantuml-jar-path "~/java/plantuml.jar")
+(setq org-plantuml-jar-path "~/java/plantuml.8024.jar")
 
 (setq org-protocol-default-template-key "w")
 

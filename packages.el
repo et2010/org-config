@@ -33,20 +33,24 @@ which require an initialization must be listed explicitly in the list.")
 
 (defun jw/init-bbdb ()
   "Initialize bbdb"
-  (use-package bbdb))
+  (use-package bbdb
+    :defer t))
 
 (defun jw/init-boxquote ()
   "Initialize boxquote"
-  (use-package boxquote))
+  (use-package boxquote
+    :defer t))
 
 (defun jw/init-cdlatex ()
   "Initialize cdlatex"
   (use-package cdlatex
+    :defer t
     :init (add-hook 'org-mode-hook 'turn-on-org-cdlatex)))
 
 (defun jw/init-org-plus-contrib ()
   "Initialize org-plus-contrib"
-  (use-package org-plus-contrib))
+  (use-package org-plus-contrib
+    :defer t))
 
 ;; Often the body of an initialize function uses `use-package'
 ;; For more info on `use-package', see readme:
