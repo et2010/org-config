@@ -17,6 +17,7 @@
     boxquote
     cdlatex
     org-plus-contrib
+    zotelo
     )
   "List of all packages to install and/or initialize. Built-in packages
 which require an initialization must be listed explicitly in the list.")
@@ -50,6 +51,11 @@ which require an initialization must be listed explicitly in the list.")
 (defun jw/init-org-plus-contrib ()
   "Initialize org-plus-contrib"
   (use-package org-plus-contrib
+    :defer t))
+
+(defun jw/init-zotelo ()
+  "Initialize zotelo"
+  (use-package zotelo
     :defer t))
 
 ;; Often the body of an initialize function uses `use-package'
