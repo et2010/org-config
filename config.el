@@ -73,6 +73,8 @@
 (add-hook 'org-babel-after-execute-hook 'jw/display-inline-images 'append)
 (add-hook 'org-clock-out-hook 'jw/clock-out-maybe 'append)
 (add-hook 'org-clock-out-hook 'jw/remove-empty-drawer-on-clock-out 'append)
+(add-hook 'org-export-before-parsing-hook 'jw/auto-tex-cmd 'append)
+(add-hook 'org-export-before-parsing-hook 'jw/auto-tex-parameters 'append)
 ; Rebuild the reminders everytime the agenda is displayed
 (add-hook 'org-finalize-agenda-hook 'jw/org-agenda-to-appt 'append)
 (add-hook 'org-insert-heading-hook 'jw/insert-heading-inactive-timestamp 'append)
@@ -648,6 +650,14 @@
 (setq org-insert-heading-respect-content nil)
 
 (setq org-latex-listings t)
+
+;; Specify default packages to be included in every tex file, whether pdflatex or xelatex
+(setq org-latex-packages-alist
+      '(("" "graphicx" t)
+        ("" "longtable" nil)
+        ("" "float" nil)
+        ("" "sinuitx" nil)
+        ("" "booktabs" nil)))
 
 (setq org-link-frame-setup (quote ((vm . vm-visit-folder)
                                    (gnus . org-gnus-no-new-news)

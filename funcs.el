@@ -762,3 +762,62 @@ Late deadlines first, then scheduled, then non-late deadlines"
   (interactive)
   (org-mark-subtree)
   (org-mime-subtree))
+
+(defun jw/auto-tex-cmd ()
+  "When exporting from .org with latex, automatically run latex,
+     pdflatex, or xelatex as appropriate, using latexmk."
+  (let ((texcmd)))
+  ;; default command: oldstyle latex via dvi
+  (setq texcmd ("latexmk -dvi -pdfps -quiet %f"
+                "latexmk -c"))
+  ;; pdflatex -> .pdf
+  (if (string-match "LATEX_CMD: pdflatex" (buffer-string))
+      (setq texcmd ("latexmk -pdf -quiet %f"
+                    "latexmk -c")))
+  ;; xelatex -> .pdf
+  (if (string-match "LATEX_CMD: xelatex" (buffer-string))
+      (setq texcmd ("latexmk -pdflatex=xelatex -pdf -quiet %f"
+                    "latexmk -c")))
+  ;; LaTeX compilation command
+  (setq org-latex-pdf-process texcmd))
+
+(defun jw/auto-tex-parameters ()
+  "Automatically select the tex packages to include."
+  ;; default packages for ordinary latex or pdflatex export
+  (setq org-latex-default-packages-alist
+        '(("AUTO" "inputenc" t)
+          ("T1"   "fontenc"   t)
+          (""     "fixltx2e"  nil)
+          (""     "wrapfig"   nil)
+          (""     "soul"      t)
+          (""     "textcomp"  t)
+          (""     "marvosym"  t)
+          (""     "wasysym"   t)
+          (""     "latexsym"  t)
+          (""     "amssymb"   t)
+          (""     "hyperref"  nil)))
+
+  ;; Packages to include when xelatex is used
+  (if (string-match "LATEX_CMD: xelatex" (buffer-string))
+      (setq org-latex-default-packages-alist
+            '(("cm-default" "fontspec" t)
+              ("" "xunicode" t)
+              ("" "xltxtra" t)
+              ("" "url" t)
+              ("" "rotating" t)
+              ;; ("american" "babel" t)
+              ;; ("babel" "csquotes" t)
+              ("" "soul" t)
+              ("xetex" "hyperref" nil)
+              ("" "zhfontcfg" t)
+              )))
+
+  (if (string-match "LATEX_CMD: xelatex" (buffer-string))
+      (setq org-latex-classes
+            (cons '("cnbook"
+                    ("\\part{%s}" . "\\part*{%s}")
+                    ("\\chapter{%s}" . "\\chapter*{%s}")
+                    ("\\section{%s}" . "\\section*{%s}")
+                    ("\\subsection{%s}" . "\\subsection*{%s}")
+                    ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
+            org-latex-classes)))
