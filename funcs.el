@@ -800,13 +800,13 @@ Late deadlines first, then scheduled, then non-late deadlines"
   ;; Packages to include when xelatex is used
   (if (string-match "LATEX_CMD: xelatex" (buffer-string))
       (setq org-latex-default-packages-alist
-            '(("" "url" t)
+            '(
               ("" "rotating" t)
-              ;; ("american" "babel" t)
-              ;; ("babel" "csquotes" t)
               ("" "soul" t)
-              ("xetex" "hyperref" nil)
+              ("" "url" t)
               ("" "zhfontcfg" t)
+              ("" "zhparcfg" t)
+              ("xetex" "hyperref" nil)
               )))
 
   (if (string-match "LATEX_CMD: xelatex" (buffer-string))

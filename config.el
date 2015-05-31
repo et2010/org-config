@@ -653,11 +653,17 @@
 
 ;; Specify default packages to be included in every tex file, whether pdflatex or xelatex
 (setq org-latex-packages-alist
-      '(("" "graphicx" t)
-        ("" "longtable" nil)
+      '(
+        ("" "array" nil)
+        ("" "booktabs" nil)
         ("" "float" nil)
+        ("" "graphicx" t)
+        ("" "longtable" nil)
+        ("" "multirow" nil)
         ("" "siunitx" nil)
-        ("" "booktabs" nil)))
+        ("" "tabulary" nil)
+        ("flushleft" "threeparttable" nil)
+        ))
 
 (setq org-link-frame-setup (quote ((vm . vm-visit-folder)
                                    (gnus . org-gnus-no-new-news)
