@@ -10,17 +10,15 @@
 ;;
 ;;; License: GPLv3
 
-(defvar jw-pre-extensions
+(setq jw-pre-extensions
   '(
     ;; pre extension jws go here
-    )
-  "List of all extensions to load before the packages.")
+    ))
 
-(defvar jw-post-extensions
+(setq jw-post-extensions
   '(
     ;; post extension jws go here
-    )
-  "List of all extensions to load after the packages.")
+    ))
 
 ;; For each extension, define a function jw/init-<extension-jw>
 ;;

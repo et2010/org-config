@@ -10,7 +10,7 @@
 ;;
 ;;; License: GPLv3
 
-(defvar jw-packages
+(setq jw-packages
   '(
     ;; package jws go here
     bbdb
@@ -18,12 +18,9 @@
     cdlatex
     org-plus-contrib
     zotelo
-    )
-  "List of all packages to install and/or initialize. Built-in packages
-which require an initialization must be listed explicitly in the list.")
+    ))
 
-(defvar jw-excluded-packages '()
-  "List of packages to exclude.")
+(setq jw-excluded-packages '())
 
 ;; For each package, define a function jw/init-<package-jw>
 ;;
