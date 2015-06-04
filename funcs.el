@@ -778,6 +778,10 @@ Late deadlines first, then scheduled, then non-late deadlines"
     (if (string-match "LATEX_CMD: xelatex" (buffer-string))
         (setq texcmd '("latexmk -pdflatex=xelatex -pdf -quiet %f"
                        "latexmk -c")))
+    ;; xelatex -> .pdf (beamer)
+    (if (string-match "STARTUP: beamer" (buffer-string))
+        (setq texcmd '("latexmk -pdflatex=xelatex -pdf -quiet %f"
+                       "latexmk -c")))
     ;; LaTeX compilation command
     (setq org-latex-pdf-process texcmd)))
 
@@ -785,7 +789,7 @@ Late deadlines first, then scheduled, then non-late deadlines"
   "Automatically select the tex packages to include."
   ;; default packages for ordinary latex or pdflatex export
   (setq org-latex-default-packages-alist
-        '(("AUTO" "inputenc" t)
+        '(("AUTO" "inputenc"  t)
           ("T1"   "fontenc"   t)
           (""     "fixltx2e"  nil)
           (""     "wrapfig"   nil)
@@ -795,6 +799,7 @@ Late deadlines first, then scheduled, then non-late deadlines"
           (""     "wasysym"   t)
           (""     "latexsym"  t)
           (""     "amssymb"   t)
+          (""     "lmodern"   t)
           (""     "hyperref"  nil)))
 
   ;; Packages to include when xelatex is used
@@ -817,4 +822,10 @@ Late deadlines first, then scheduled, then non-late deadlines"
                     ("\\section{%s}" . "\\section*{%s}")
                     ("\\subsection{%s}" . "\\subsection*{%s}")
                     ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))
-            org-latex-classes))))
+                  org-latex-classes)))
+
+  (if (string-match "STARTUP: beamer" (buffer-string))
+      (setq org-latex-default-packages-alist
+            '(
+              ("" "beamerthemesplit" nil)
+              ("" "zhfontcfg" t)))))

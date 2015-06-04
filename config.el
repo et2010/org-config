@@ -481,6 +481,11 @@
 ; Make babel results blocks lowercase
 (setq org-babel-results-keyword "results")
 
+(setq org-beamer-environments-extra (quote
+                                     (("onlyenv" "O"
+                                       "\\begin{onlyenv}%a"
+                                       "\\end{onlyenv}"))))
+
 (setq org-blank-before-new-entry (quote ((heading)
                                          (plain-list-item . auto))))
 
