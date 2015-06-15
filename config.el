@@ -276,12 +276,12 @@
          (emacs-lisp . t)
          (gnuplot . t)
          (latex . t)
+         (ledger . t)
          (org . t)
          (plantuml . t)
          (python . t)
          (sh . t)
          ;; (clojure . t)
-         ;; (ledger . t)
          ;; (ruby . t)
          )))
 
