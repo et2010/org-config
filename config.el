@@ -508,7 +508,15 @@
               ("p" "Phone call" entry (file "~/git/org/refile.org")
                "* PHONE %? :PHONE:\n%U" :clock-in t :clock-resume t)
               ("h" "Habit" entry (file "~/git/org/refile.org")
-               "* NEXT %?\n%U\n%a\nSCHEDULED: %(format-time-string \"<%Y-%m-%d %a .+1d/3d>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:END:\n"))))
+               "* NEXT %?\n%U\n%a\nSCHEDULED: %(format-time-string \"<%Y-%m-%d %a .+1d/3d>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:END:\n")
+              ("l" "Ledger entries")
+              ("lm" "CCB" plain (file "~/git/ledger")
+               "%(jw/read-date) %^{Payee} Liabilities:CCB Expenses:%^{Account}  %^{Amount} "
+               :empty-lines 1)
+              ("lc" "Cash" plain (file "~/git/ledger")
+               "%(jw/read-date) * %^{Payee} Expenses:Cash Expenses:%^{Account}  %^{Amount} "
+               :empty-lines 1)
+              )))
 
 (setq org-catch-invisible-edits 'error)
 

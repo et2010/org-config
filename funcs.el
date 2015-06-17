@@ -829,3 +829,7 @@ Late deadlines first, then scheduled, then non-late deadlines"
             '(
               ("" "beamerthemesplit" nil)
               ("" "zhfontcfg" t)))))
+
+(defun jw/read-date ()
+  "Parse date for capturing ledger entries via org mode"
+  (replace-regexp-in-string "-" "/" (org-read-date)))

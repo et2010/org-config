@@ -16,6 +16,7 @@
     bbdb
     boxquote
     cdlatex
+    ledger-mode
     org-plus-contrib
     zotelo
     ))
@@ -44,6 +45,11 @@
   (use-package cdlatex
     :defer t
     :init (add-hook 'org-mode-hook 'turn-on-org-cdlatex)))
+
+(defun jw/init-ledger-mode ()
+  "Initialize ledger-mode"
+  (use-package ledger-mode
+    :defer t))
 
 (defun jw/init-org-plus-contrib ()
   "Initialize org-plus-contrib"
