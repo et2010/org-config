@@ -833,3 +833,62 @@ Late deadlines first, then scheduled, then non-late deadlines"
 (defun jw/read-date ()
   "Parse date for capturing ledger entries via org mode"
   (replace-regexp-in-string "-" "/" (org-read-date)))
+
+(defun jw/shell-command-on-buffer()
+  "Asks for a command and executes it in inferior shell with current buffer
+as input."
+  (interactive)
+  (shell-command-on-region
+   (point-min) (point-max)
+   (read-shell-command "Shell command on buffer: ")))
+
+(defun jw/run-current-file ()
+  "Execute the current file.
+For example, if the current buffer is the file xx.py, then it'll call 「python xx.py」 in a shell.
+The file can be php, perl, python, ruby, javascript, bash, ocaml, vb, elisp.
+File suffix is used to determine what program to run.
+
+If the file is modified, ask if you want to save first.
+
+URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'
+version 2014-10-28"
+  (interactive)
+  (let* (
+         (suffixMap
+          ;; (‹extension› . ‹shell program name›)
+          `(
+            ;; ("php" . "php")
+            ;; ("pl" . "perl")
+            ;; ("py" . "python")
+            ;; ("py3" . ,(if (string-equal system-type "windows-nt") "c:/Python32/python.exe" "python3"))
+            ;; ("rb" . "ruby")
+            ;; ("js" . "node") ; node.js
+            ;; ("sh" . "bash")
+            ;; ("clj" . "java -cp /home/xah/apps/clojure-1.6.0/clojure-1.6.0.jar clojure.main")
+            ;; ("ml" . "ocaml")
+            ;; ("vbs" . "cscript")
+            ;; ("pov" . "/usr/local/bin/povray +R2 +A0.1 +J1.2 +Am2 +Q9 +H480 +W640")
+            ("dat" . "pfc3d")
+            ("DVR" . "pfc3d")
+            ))
+         (fName (if (eq system-type 'windows-nt)
+                    (replace-regexp-in-string "/" "\\" (buffer-file-name) t t)
+                  (buffer-file-name)))
+         (fSuffix (file-name-extension fName))
+         (progName (cdr (assoc fSuffix suffixMap)))
+         ;; (cmdStr (concat progName " " fName))
+         )
+
+    (when (buffer-modified-p)
+      (when (y-or-n-p "Buffer modified. Do you want to save first?")
+        (save-buffer)))
+
+    (if (string-equal fSuffix "el") ; special case for emacs lisp
+        (load fName)
+      (if progName
+          (progn
+            (message "Running…")
+            ;; (shell-command cmdStr "*jw/run-current-file output*" )
+            (start-process "jw/process" "*jw/run-current-file output*" progName fName))
+        (message "No recognized program file suffix for this file.")))))
+
