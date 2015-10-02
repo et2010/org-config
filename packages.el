@@ -17,7 +17,7 @@
     boxquote
     cdlatex
     ledger-mode
-    org-plus-contrib
+    visual-fill-column
     zotelo
     ))
 
@@ -51,15 +51,20 @@
   (use-package ledger-mode
     :defer t))
 
-(defun jw/init-org-plus-contrib ()
-  "Initialize org-plus-contrib"
-  (use-package org-plus-contrib
-    :defer t))
-
 (defun jw/init-zotelo ()
   "Initialize zotelo"
   (use-package zotelo
     :defer t))
+
+(defun jw/init-visual-fill-column ()
+  "Initialize visual-fill-column"
+  (use-package visual-fill-column
+    :init
+    (add-hook 'visual-line-mode-hook 'visual-fill-column-mode)
+    ;; 最好将word-wrap的值设为nil，否则中英文混排时换行都发生在英文单词结束处，非常难看。
+    (add-hook 'visual-line-mode-hook
+              '(lambda ()
+                (set (make-local-variable 'word-wrap) nil)))))
 
 ;; Often the body of an initialize function uses `use-package'
 ;; For more info on `use-package', see readme:
