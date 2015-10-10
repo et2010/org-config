@@ -52,7 +52,11 @@
 (defun jw/init-ssh-agency ()
   "Initialize ssh-agency"
   (use-package ssh-agency
-    :defer t))
+    :defer t
+    :init
+    (progn
+      (setq ssh-agency-keys '("~/.ssh/github-key"
+                             "~/.ssh/bitbucket-key")))))
 
 (defun jw/init-visual-fill-column ()
   "Initialize visual-fill-column"
