@@ -12,7 +12,6 @@
 
 (setq jw-packages
   '(
-    ;; package jws go here
     bbdb
     boxquote
     cdlatex
@@ -21,14 +20,8 @@
     zotelo
     ))
 
-(setq jw-excluded-packages '())
-
-;; For each package, define a function jw/init-<package-jw>
-;;
-;; (defun jw/init-my-package ()
-;;   "Initialize my package"
-;;   )
-;;
+(if (eq system-type 'windows-nt)
+    (push 'ssh-agency jw-packages))
 
 (defun jw/init-bbdb ()
   "Initialize bbdb"
@@ -54,6 +47,11 @@
 (defun jw/init-zotelo ()
   "Initialize zotelo"
   (use-package zotelo
+    :defer t))
+
+(defun jw/init-ssh-agency ()
+  "Initialize ssh-agency"
+  (use-package ssh-agency
     :defer t))
 
 (defun jw/init-visual-fill-column ()
