@@ -52,8 +52,9 @@
 (defun jw/init-ssh-agency ()
   "Initialize ssh-agency"
   (use-package ssh-agency
+    :if (eq system-type 'windows-nt)
     :defer t
-    :init
+    :config
     (progn
       (setq ssh-agency-keys '("~/.ssh/github-key"
                              "~/.ssh/bitbucket-key")))))
