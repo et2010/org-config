@@ -42,7 +42,7 @@
   (interactive)
   (save-excursion
     (beginning-of-line 0)
-    (org-remove-empty-drawer-at "LOGBOOK" (point))))
+    (org-remove-empty-drawer-at (point))))
 
 ;; Exclude DONE state tasks from refile targets
 (defun jw/verify-refile-target ()
