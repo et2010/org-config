@@ -270,7 +270,7 @@
 
 (org-babel-do-load-languages
  (quote org-babel-load-languages)
- (quote ((R . t)
+ (quote (;(R . t)
          (ditaa . t)
          (dot . t)
          (emacs-lisp . t)
