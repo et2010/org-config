@@ -12,7 +12,6 @@
 
 (setq jw-packages
   '(
-    bbdb
     boxquote
     cdlatex
     ledger-mode
@@ -21,7 +20,8 @@
     ))
 
 (if (eq system-type 'windows-nt)
-    (push 'ssh-agency jw-packages))
+    (push 'ssh-agency jw-packages)
+  (push 'bbdb jw-packages))
 
 (defun jw/init-bbdb ()
   "Initialize bbdb"
